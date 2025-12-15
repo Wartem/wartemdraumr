@@ -76,9 +76,11 @@ cards: [
         subtitle: 'The Hearth & The Saga',
         desc: 'Norse Folk is music for listening and remembrance. It is carried by voice, melody, and texture, shaped by story, landscape, and lived memory. This is sound for the long form: reflection, continuity, and presence within place.',
         playlist: [
-            'assets/video_04.mp4',
-            'assets/video_05.mp4',
-            'assets/video_02.mp4'
+            'assets/Norse_Forest_Rain_Immersion.mp4',
+            'assets/Norse_Longhouse_In_Rainy_Forest.mp4',
+            'assets/Immersive_Norse_Forest_Rain_Video.mp4',
+            'assets/Norse_Ritual_Place_in_Forest (3).mp4',
+            'assets/Norse_Ritual_Place_in_Forest (2).mp4'
         ],
         overlayTitle: 'The Folk Forms',
 cards: [
@@ -107,7 +109,7 @@ cards: [
 const FADE_DURATION = 2000;
 
 // --- STATE VARIABLES ---
-let currentFocus = 'artist'; // Default
+let currentFocus = null; // 'artist'; // Default
 let activePlaylist = [];
 let currentPlaylistIndex = 0;
 let activePlayerId = 1; 
@@ -139,10 +141,17 @@ const focusOptions = document.querySelectorAll('.focus-list button');
 
 // --- INITIALIZATION ---
 
+let revealed = false;
+
 function init() {
     // Set Initial State
     setFocus('artist');
-    
+
+    if (!revealed) {
+        document.body.style.opacity = "1";
+        revealed = true;
+    } 
+        
     // Setup Global Listeners
     setupFocusOverlay();
     setupKeyboard();
@@ -184,7 +193,9 @@ soundTrigger.addEventListener('click', toggleSound);
 // --- FOCUS MANAGEMENT ENGINE ---
 
 function setFocus(focusKey) {
-    if (!CONTENT[focusKey]) return;
+    if (!CONTENT[focusKey]) return;        // validate first
+    if (focusKey === currentFocus) return; // prevent redundant render
+
     const data = CONTENT[focusKey];
     currentFocus = focusKey;
 
@@ -411,10 +422,16 @@ function setupFocusOverlay() {
 
     focusOptions.forEach(btn => {
         btn.addEventListener('click', () => {
-            const focusKey = btn.getAttribute('data-focus');
-            setFocus(focusKey);
-            focusOverlay.classList.remove('open');
-        });
+    const focusKey = btn.getAttribute('data-focus');
+
+    // Start transition FIRST
+    setFocus(focusKey);
+
+    // Close overlay AFTER fade-out has started
+    setTimeout(() => {
+        focusOverlay.classList.remove('open');
+    }, 300);
+});
     });
 }
 
@@ -443,3 +460,7 @@ function setupKeyboard() {
 
 // Start
 document.addEventListener('DOMContentLoaded', init);
+
+/* window.addEventListener("load", () => {
+    document.body.style.opacity = "1";
+    }); */
