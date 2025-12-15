@@ -232,13 +232,14 @@ body {
 .ui-trigger {
     background: none;
     border: none;
-    color: #555;
+    color: rgba(255, 255, 255, 0.70); /* was #555 */
     font-family: 'Cinzel', serif;
     font-size: 0.7rem;
     letter-spacing: 0.15em;
     cursor: pointer;
     text-transform: uppercase;
-    transition: color 0.3s;
+    transition: color 0.3s, opacity 0.3s;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.45);
 }
 
 #ui-controls {
@@ -257,7 +258,7 @@ body {
 }
 
 #sound-trigger {
-    opacity: 0.7;
+    opacity: 0.90;
 }
 #sound-trigger:hover {
     opacity: 1;
