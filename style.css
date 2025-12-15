@@ -145,6 +145,85 @@ body, html {
     transition: color 0.3s;
 } */
 
+.text-scrim {
+    position: relative;
+    max-width: 72ch;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2.25rem;
+
+    padding: 1.75rem 4rem 3.5rem;
+
+    border-radius: 6px;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.38) 0%,
+        rgba(0, 0, 0, 0.32) 25%,
+        rgba(0, 0, 0, 0.22) 55%,
+        rgba(0, 0, 0, 0.10) 75%,
+        rgba(0, 0, 0, 0.0) 100%
+    );
+}
+
+.social-links {
+    margin-top: 2.5rem;
+    text-align: center;
+
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.social-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.social-link:hover,
+.social-link:focus {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.social-separator {
+    margin: 0 0.6rem;
+    opacity: 0.4;
+}
+
+/* .text-scrim-mini {
+    position: relative;
+    max-width: 72ch;
+    opacity: 0.85;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2.25rem;
+
+    padding: 1.25rem 3rem 1.75rem;
+
+    border-radius: 6px;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.38) 0%,
+        rgba(0, 0, 0, 0.28) 50%,
+        rgba(0, 0, 0, 0.12) 85%,
+        rgba(0, 0, 0, 0.0) 100%
+    );
+} */
+
+.text-scrim p {
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.text-scrim h2 {
+    color: rgba(255, 255, 255, 0.78);
+}
+
 .ui-trigger {
     background: none;
     border: none;
@@ -405,21 +484,24 @@ p {
 
 .social-links {
     display: flex;
-    gap: 1.5rem;
-    margin-top: 1rem;
+    justify-content: center;
+    gap: 2rem;
 }
 
 .social-link {
-    color: #666;
-    text-decoration: none;
-    font-size: 0.75rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    transition: color 0.3s;
+
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+
+    transition: color 0.2s ease, opacity 0.2s ease;
 }
 
-.social-link:hover {
-    color: #bbb;
+.social-link:hover,
+.social-link:focus {
+    color: rgba(255, 255, 255, 0.95);
 }
 
 /* --- STATUS TEXT --- */
@@ -472,6 +554,11 @@ p {
     display: block;
     margin-bottom: 1rem;
     letter-spacing: 0.08em;
+}
+
+#landing-desc {
+    line-height: 1.7;
+    letter-spacing: 0.045em;
 }
 
 .cycle-card {
@@ -569,6 +656,20 @@ body.ritual-active .presentation-layer {
 
 /* Responsive */
 @media (max-width: 768px) {
+     .social-links {
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1.75rem;
+    }
+
+    .social-separator {
+        display: none;
+    }
+
+    .social-link {
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+    }
     .cycles-grid {
         flex-direction: column;
         align-items: center;
@@ -579,5 +680,8 @@ body.ritual-active .presentation-layer {
     }
     .focus-buttons-row {
         flex-direction: column;
+    }
+    .text-scrim {
+    padding: 2rem;
     }
 }
