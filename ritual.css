@@ -1,0 +1,67 @@
+/* ritual.css */
+/* Audio-reactive atmospheric response */
+
+/* Increase grain slightly */
+body.is-playing .noise-overlay {
+    opacity: 0.075; /* was 0.04 */
+}
+
+/* Slightly deepen vignette */
+body.is-playing .vignette {
+    background: radial-gradient(
+        circle,
+        rgba(0,0,0,0.15) 0%,
+        rgba(0,0,0,0.5) 50%,
+        rgba(0,0,0,0.97) 100%
+    );
+}
+
+/* Very subtle global tightening */
+body.is-playing {
+    filter: contrast(1.025);
+}
+
+.progress-line {
+    height: 1px;
+    width: 0%;
+    background: rgba(220, 200, 160, 0.6);
+    margin-top: 1rem;
+    transition: width 0.2s linear;
+}
+
+.cycle-card:not(.is-active) .progress-line {
+    width: 0;
+}
+
+/* ritual.css */
+/* Active card feedback */
+
+.cycle-card.is-playable {
+    cursor: pointer;
+}
+
+.cycle-card.is-active {
+    outline: 1px solid rgba(220, 200, 160, 0.35);
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.cycle-card.is-active .rune {
+    opacity: 1;
+}
+
+/* .cycle-card.is-active h4 {
+    letter-spacing: 0.04em;
+} */
+
+
+/* Reduced motion / subtle mode */
+@media (prefers-reduced-motion: reduce) {
+    body.is-playing {
+        filter: none;
+    }
+
+    body.is-playing .noise-overlay {
+        opacity: 0.055;
+    }
+}
+

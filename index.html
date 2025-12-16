@@ -16,6 +16,7 @@
     
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ritual.css">
 </head>
 <body>
 
@@ -31,7 +32,7 @@
     <!-- OVERLAYS -->
     <div class="vignette"></div>
     <div class="noise-overlay"></div>
-    <div id="blood-overlay"></div> 
+    <div id="ritual-overlay"></div> 
     <div id="fade-overlay"></div> <!-- Utility for video switching -->
 
     <!--   SOUND EFFECTS -->
@@ -54,7 +55,7 @@
                 <li><button data-focus="primal">Primal Norse</button></li>
                 <li><button data-focus="folk">Norse Folk</button></li>
             </ul>
-            <button id="close-focus-btn" class="btn-text">Close</button>
+            <button id="close-focus-btn" class="ui-trigger">Close</button>
         </div>
     </div>
 
@@ -92,6 +93,8 @@
             <!-- Dynamic Cards injected here -->
         </div>
 
+        <button id="exit-btn" class="btn-text">Stand Down</button>
+
         <div class="social-links">
         <a href="#" class="social-link">Spotify</a>
         <span class="social-separator">·</span>
@@ -100,12 +103,14 @@
         <a href="#" class="social-link">Bandcamp</a>
         </div>
 
-        <button id="exit-btn" class="btn-text">Stand Down</button>
     </div>
 
     <div class="status-text" id="status-display">Initializing Sequence...</div>
 
+    <audio id="global-audio" preload="none"></audio>
+
     <!-- External JS -->
     <script src="script.js"></script>
+    <script src="player.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ const CONTENT = {
         id: 'artist',
         title: 'Wartem Draumr',
         subtitle: 'Ancient Norse — A Unified Identity',
-        desc: 'Wartem Draumr is the artistic identity through which an ancient spirit is restored as lived presence and function. Working from an Ancient Norse foundation, the music unfolds through two distinct sonic paths. Primal Norse is visceral, bodily, and ritual-driven. Norse Folk is narrative, textural, and rooted in place and memory. Both are inseparable expressions of the same underlying force.',
+        desc: 'Wartem Draumr is an artistic identity through which Norse-inspired music is explored across two complementary approaches. Working from an Ancient Norse foundation, the music unfolds through two distinct sonic paths. Primal Norse is visceral, bodily, and ritual-driven. Norse Folk is narrative, textural, and rooted in place and memory. Both are inseparable expressions of the same underlying force.',
         playlist: [
             'assets/Nordic_Landscape_Video_Generation.mp4',
             'assets/Nordic_Landscape_Video_Generation (1).mp4',
@@ -21,18 +21,30 @@ cards: [
         title: 'Ancient Norse',
         meta: 'The Foundation',
         desc: 'The cultural and mythological ground. A living root system of symbols, practices, and memory from which all expressions emerge.'
+/*         ,
+        track: {
+        src: 'assets/'
+        } */
     },
     {
         id: 'II',
         title: 'Primal Norse',
         meta: 'The Body',
         desc: 'The active state. Trance, adrenaline, and physical focus. Music as ritual function, designed to alter the body and sharpen intent.'
+/*         ,
+        track: {
+        src: 'assets/'
+        } */
     },
     {
         id: 'III',
         title: 'Norse Folk',
         meta: 'The Spirit',
         desc: 'The reflective state. Story, voice, and melody shaped by place and memory. Music for listening, remembrance, and continuity.'
+/*         ,
+                track: {
+        src: 'assets/'
+        } */
     }
 ]
     },
@@ -43,30 +55,40 @@ cards: [
         desc: 'Primal Norse is music designed for altered physical states. It is rhythm-driven, forceful, and functional, built to sharpen focus, elevate adrenaline, and carry the body through exertion and trance. This is sound as ritual tool: direct, uncompromising, and embodied.',
         playlist: [
             'assets/Viking_Berserker_Rage_Cinematic_Video (1).mp4', 
-            'assets/Viking_Berserker_Rage_Cinematic_Video (2).mp4',
             'assets/Viking_Berserker_Rage_Cinematic_Video (3).mp4',
             'assets/Viking_Berserker_Rage_Cinematic_Video (4).mp4',
-            'assets/Viking_Berserker_Rage_Cinematic_Video (5).mp4'
+            'assets/Viking_Berserker_Rage_Cinematic_Video (5).mp4',
+            'assets/Viking_Berserker_Rage_Cinematic_Video (6).mp4',
+            'assets/Viking_Berserker_Rage_Cinematic_Video (8).mp4'
         ],
         overlayTitle: 'The Ritual Cycles',
 cards: [
     {
         id: 'I',
         title: 'Ginnungagap',
-        meta: 'The Void • 60 BPM',
-        desc: 'Low-frequency drones and sustained tones designed to slow breathing and heart rate. Clears mental noise and prepares the body for focus before exertion.'
+        meta: 'The Void • Grounded',
+        desc: 'Low-frequency drones and sustained tones designed to slow breathing and heart rate. Clears mental noise and prepares the body for focus before exertion.',
+        track: {
+        src: 'assets/ginnungagap_22_odins_fury_120_pre.mp3'
+        }
     },
     {
         id: 'II',
         title: 'Berserkergang',
-        meta: 'The Fury • 140 BPM',
-        desc: 'Aggressive, polyrhythmic percussion and driving patterns that elevate adrenaline and trigger the fight response. Built for output, force, and forward momentum.'
+        meta: 'The Fury • Surging',
+        desc: 'Aggressive, polyrhythmic percussion and driving patterns that elevate adrenaline and trigger the fight response. Built for output, force, and forward momentum.',
+        track: {
+        src: 'assets/berserkergang_hamask_160_pre.mp3'
+        }
     },
     {
         id: 'III',
         title: 'Valhalla',
-        meta: 'The Release • Free Tempo',
-        desc: 'Extended textures and open pacing that allow the nervous system to settle. Supports recovery, grounding, and the return from total physical expenditure.'
+        meta: 'The Release • Gathering',
+        desc: 'Extended textures and open pacing that allow the nervous system to settle. Supports recovery, grounding, and the return from total physical expenditure.',
+        track: {
+        src: 'assets/valhalla_runaljud.mp3'
+        }
     }
 ]
     },
@@ -78,35 +100,50 @@ cards: [
         playlist: [
             'assets/Norse_Forest_Rain_Immersion.mp4',
             'assets/Norse_Longhouse_In_Rainy_Forest.mp4',
+            'assets/Immersive_Norse_Forest_Rain_Video (1).mp4',
             'assets/Immersive_Norse_Forest_Rain_Video.mp4',
             'assets/Norse_Ritual_Place_in_Forest (3).mp4',
-            'assets/Norse_Ritual_Place_in_Forest (2).mp4'
+            'assets/Norse_Ritual_Place_in_Forest (2).mp4',
+            'assets/Immersive_Norse_Forest_Rain_Video (2).mp4'
         ],
         overlayTitle: 'The Folk Forms',
 cards: [
     {
         id: 'I',
         title: 'Saga',
-        meta: 'The Story',
-        desc: 'Melodic structures built around voice and string, intended to carry narrative over time. Supports listening, recall, and the transmission of memory through song.'
+        meta: 'The Story • Grounded',
+        desc: 'Melodic structures built around voice and string, intended to carry narrative over time. Supports listening, recall, and the transmission of memory through song.',
+        track: {
+        src: 'assets/saga_1_restless_lover_2_k100_pre.mp3'
+        }
     },
     {
         id: 'II',
         title: 'Hearth',
-        meta: 'The Home',
-        desc: 'Close, grounded textures shaped by repetition and warmth. Creates a sense of safety, continuity, and presence within a shared space.'
+        meta: 'The Home • Driving',
+        desc: 'Close, grounded textures shaped by repetition and warmth. Creates a sense of safety, continuity, and presence within a shared space.',
+        track: {
+        src: 'assets/hearth_12_forns_sagna_k60_pre.mp3'
+        }
     },
     {
         id: 'III',
         title: 'Voyage',
-        meta: 'The Horizon',
-        desc: 'Extended, unfolding compositions that accompany movement and transition. Orients attention outward toward landscape, distance, and passage.'
+        meta: 'The Horizon • Flowing',
+        desc: 'Extended, unfolding compositions that accompany movement and transition. Orients attention outward toward landscape, distance, and passage.',
+        track: {
+        src: 'assets/voy_16_Echoes_Ancients_pre.mp3'
+        }
     }
 ]
     }
 };
 
-const FADE_DURATION = 2000;
+const FADE_DURATIONS = {
+    artist: 1500,
+    primal: 1400,
+    folk: 1500
+};
 
 // --- STATE VARIABLES ---
 let currentFocus = null; // 'artist'; // Default
@@ -160,20 +197,11 @@ function init() {
     statusDisplay.textContent = "Identity: Wartem Draumr // Active";
 }
 
+function getFadeDuration() {
+    return FADE_DURATIONS[currentFocus] || 1400;
+}
+
 const soundTrigger = document.getElementById('sound-trigger');
-
-soundTrigger.addEventListener('click', () => {
-    soundEnabled = !soundEnabled;
-
-    [player1, player2].forEach(player => {
-        player.muted = !soundEnabled;
-        if (soundEnabled) {
-            player.volume = 0.8; // fixed, restrained level
-        }
-    });
-
-    soundTrigger.textContent = soundEnabled ? 'Sound: On' : 'Sound: Off [M]';
-});
 
 function toggleSound() {
     soundEnabled = !soundEnabled;
@@ -272,20 +300,28 @@ function renderActionButtons(focusKey) {
 
 function renderPresentationLayer(data) {
     presentationTitle.textContent = data.overlayTitle;
-    
-    // Clear grid
     cyclesGrid.innerHTML = '';
-    
-    // Generate Cards
+
     data.cards.forEach(card => {
         const div = document.createElement('div');
         div.className = 'cycle-card';
+
         div.innerHTML = `
             <span class="rune">${card.id}</span>
             <h4>${card.title}</h4>
             <p class="meta">${card.meta}</p>
             <p class="desc">${card.desc}</p>
+            <div class="progress-line"></div>
         `;
+
+        // STEP 4: wire card to audio playback (only if track exists)
+    if (card.track && card.track.src && window.WDPlayer) {
+        div.addEventListener('click', () => {
+            window.WDPlayer.playTrack(card.track.src, card.id, div);
+        });
+        div.classList.add('is-playable');
+    }
+
         cyclesGrid.appendChild(div);
     });
 }
@@ -293,49 +329,54 @@ function renderPresentationLayer(data) {
 // --- VIDEO ENGINE ---
 
 function changeVideoContext(newPlaylist) {
-    // Stop crossfader
+    // HARD reset of engine state
     isTransitioning = false;
-    
-    // Update data
-    activePlaylist = newPlaylist;
     currentPlaylistIndex = 0;
+    activePlayerId = 1;
 
-    // Cinematic Fade Reset
-    fadeOverlay.classList.add('active'); // Fade screen to black
+    activePlaylist = newPlaylist;
+
+    const fadeDuration = getFadeDuration();
+
+    // Drop curtain
+    fadeOverlay.classList.add('active');
 
     setTimeout(() => {
-        // Reset Players behind the curtain
-        activePlayerId = 1;
-        
-        player1.src = activePlaylist[0];
-        player1.load();
-        player1.classList.remove('visible'); // Reset visibility
-        
-        player2.src = activePlaylist[1];
-        player2.load();
-        player2.classList.remove('visible');
+        // FULL reset behind curtain
+        [player1, player2].forEach(player => {
+            player.pause();
+            player.currentTime = 0;
+            player.classList.remove('visible');
 
-        // Play P1
-        player1.play().then(() => {
-            player1.classList.add('visible');
-            fadeOverlay.classList.remove('active'); // Lift curtain
-        }).catch(err => {
-            console.warn("Autoplay blocked", err);
-            // Even if blocked, we lift curtain so user can see/interact
-            fadeOverlay.classList.remove('active'); 
+            // CRITICAL: remove stale source
+            player.removeAttribute('src');
+            player.load();
         });
 
-    }, 1100); // Wait for fade to black (1s) + buffer (100ms)
+        // Load ONLY the first video into player1
+        player1.src = activePlaylist[0];
+        player1.load();
+
+        player1.play().then(() => {
+            player1.classList.add('visible');
+            isTransitioning = false;
+            fadeOverlay.classList.remove('active');
+        }).catch(() => {
+            fadeOverlay.classList.remove('active');
+        });
+
+    }, fadeDuration);
 }
 
 function performCrossfade() {
     isTransitioning = true;
+
+    const fadeDuration = getFadeDuration();
+
     const currentVid = activePlayerId === 1 ? player1 : player2;
     const nextVid = activePlayerId === 1 ? player2 : player1;
     const nextIdx = (currentPlaylistIndex + 1) % activePlaylist.length;
 
-    // Load next video into the hidden player if not already done
-    // (Ideally done after previous swap, but checking here ensures safety)
     if (!nextVid.src.includes(activePlaylist[nextIdx])) {
         nextVid.src = activePlaylist[nextIdx];
         nextVid.load();
@@ -348,33 +389,38 @@ function performCrossfade() {
         setTimeout(() => {
             currentVid.pause();
             currentVid.currentTime = 0;
-            
-            // State Update
+
             activePlayerId = activePlayerId === 1 ? 2 : 1;
             currentPlaylistIndex = nextIdx;
-            
-            // Preload *Next* Step
+
             const futureIdx = (currentPlaylistIndex + 1) % activePlaylist.length;
             currentVid.src = activePlaylist[futureIdx];
             currentVid.load();
-            
+
             isTransitioning = false;
-        }, FADE_DURATION);
-    }).catch(e => {
-        console.error("Crossfade failed", e);
+        }, fadeDuration);
+    }).catch(() => {
         isTransitioning = false;
     });
 }
 
 function checkTime(e) {
     if (activePlaylist.length < 2) return;
-    
-    const player = e.target;
-    // Only active player checks time
-    if (player !== (activePlayerId === 1 ? player1 : player2)) return;
 
+    const player = e.target;
+    const activePlayer = activePlayerId === 1 ? player1 : player2;
+
+    if (player !== activePlayer) return;
+    if (!player.duration || isNaN(player.duration)) return;
+
+    const fadeDuration = getFadeDuration();
     const remaining = player.duration - player.currentTime;
-    if (remaining < (FADE_DURATION / 1000) && remaining > 0.1 && !isTransitioning) {
+
+    if (
+        remaining < (fadeDuration / 1000) &&
+        remaining > 0.1 &&
+        !isTransitioning
+    ) {
         performCrossfade();
     }
 }

@@ -5,17 +5,34 @@
     box-sizing: border-box;
 }
 
-body, html {
+/* body, html {
     width: 100%;
     height: 100%;
     overflow: hidden;
     background-color: #050505; /* Deep black fallback */
-    font-family: 'Raleway', sans-serif;
-    color: #e0e0e0; /* Off-white/Bone color */
-    -webkit-font-smoothing: antialiased;
+    /* font-family: 'Raleway', sans-serif; */
+    /* color: #e0e0e0;  *//* Off-white/Bone color */
+    /* -webkit-font-smoothing: antialiased; */
+/*     overflow-x: hidden;
+    overflow-y: auto; */
+/* }  */
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+
+    background-color: #050505;
+    font-family: 'Raleway', sans-serif;
+    color: #e0e0e0;
+    -webkit-font-smoothing: antialiased;
+
     opacity: 0;
     transition: opacity 0.4s ease;
 }
@@ -95,7 +112,7 @@ body {
     pointer-events: none;
 }
 
-#blood-overlay {
+#ritual-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -173,8 +190,10 @@ body {
 }
 
 .social-links {
-    margin-top: 2.5rem;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
 
     font-size: 0.75rem;
     letter-spacing: 0.18em;
@@ -240,6 +259,7 @@ body {
     text-transform: uppercase;
     transition: color 0.3s, opacity 0.3s;
     text-shadow: 0 1px 6px rgba(0,0,0,0.45);
+    padding: 0.5rem 0.5em;
 }
 
 #ui-controls {
@@ -306,6 +326,15 @@ body {
     font-size: 0.8rem;
 }
 
+.modal-content .ui-trigger {
+    margin-top: 3rem;
+    opacity: 0.6;
+}
+
+.modal-content .ui-trigger:hover {
+    opacity: 1;
+}
+
 .focus-list {
     list-style: none;
     margin-bottom: 3rem;
@@ -333,17 +362,25 @@ body {
 }
 
 /* Content Shared */
-.content-layer, .presentation-layer {
+.content-layer,
+.presentation-layer {
     position: absolute;
     z-index: 10;
     width: 100%;
-    height: 100%;
+
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 2rem;
+
+    min-height: 100vh;
+    justify-content: flex-start;
+
+    padding-top: 6rem;
+    padding-right: 2rem;
+    padding-bottom: 4rem;
+    padding-left: 2rem;
+
     transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
 }
 
@@ -474,6 +511,20 @@ p {
     color: #fff;
 }
 
+#exit-btn {
+    margin: 0 0 1.75rem 0;
+    padding-top: 3rem;
+
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+}
+
+#exit-btn:hover {
+    color: #ffffff;
+}
+
 /* Artist Focus Action Styles */
 .artist-actions {
     display: flex;
@@ -487,12 +538,6 @@ p {
     justify-content: center;
     gap: 1rem;
     margin-bottom: 1rem;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
 }
 
 .social-link {
@@ -547,7 +592,11 @@ p {
 /* Focus specific dividers */
 .focus-primal .divider { background: #8b0000; box-shadow: 0 0 10px #8b0000; }
 .focus-folk .divider { background: #5f7161; box-shadow: 0 0 10px #5f7161; }
-.focus-artist .divider { background: #888; }
+/* .focus-artist .divider { background: #888; } */
+.focus-artist .divider {
+    background: #4a6fa5;
+    box-shadow: 0 0 10px rgba(74, 111, 165, 0.6);
+}
 
 .cycles-grid {
     display: flex;
@@ -583,6 +632,10 @@ p {
     background: rgba(30, 30, 30, 0.6);
     border-color: #aaa;
     transform: translateY(-5px);
+}
+
+.cycle-card.is-playable {
+    cursor: pointer;
 }
 
 .focus-primal .cycle-card:hover { border-color: #8b0000; }
@@ -635,9 +688,9 @@ p {
 /* --- STATE ANIMATIONS --- */
 
 /* State: Ritual Active (Shield Wall Open) */
-body.ritual-active #blood-overlay {
+body.ritual-active #ritual-overlay {
     opacity: 1;
-    animation: pulse-red 5s infinite ease-in-out;
+    /* animation: pulse-red 5s infinite ease-in-out; */
 }
 
 /* Hide Landing Page */
@@ -655,10 +708,99 @@ body.ritual-active .presentation-layer {
     transition-delay: 0.5s;
 }
 
+/* .presentation-layer .social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    width: fit-content;
+    margin: 0 auto;
+
+    padding: 1rem 1.5rem;
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+
+    letter-spacing: 0.22em;
+  
+    margin-top: 0.75rem;
+    padding-top: 1.5rem;
+
+    margin-left: auto;
+    margin-right: auto;
+} */
+
+.presentation-layer .social-links {
+    width: fit-content;
+    margin: 0.75rem auto 0;
+
+    padding: 1.5rem 1.5rem 0;
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+
+    letter-spacing: 0.22em;
+}
+
+.presentation-layer .social-link {
+    color: rgba(255, 255, 255, 0.72);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+}
+
+.presentation-layer .social-link:hover,
+.presentation-layer .social-link:focus {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+body.ritual-active.focus-primal #ritual-overlay {
+    background: radial-gradient(
+        circle,
+        transparent 20%,
+        rgba(100, 0, 0, 0.4) 80%,
+        rgba(50, 0, 0, 0.9) 100%
+    );
+    animation: pulse-red 5s infinite ease-in-out;
+}
+
+body.ritual-active.focus-folk #ritual-overlay {
+    background: radial-gradient(
+        circle,
+        transparent 20%,
+        rgba(40, 70, 40, 0.45) 80%,
+        rgba(20, 40, 20, 0.9) 100%
+    );
+    animation: pulse-green 6s infinite ease-in-out;
+}
+
+body.ritual-active.focus-artist #ritual-overlay {
+    background: radial-gradient(
+        circle,
+        transparent 20%,
+        rgba(40, 60, 90, 0.45) 80%,
+        rgba(20, 30, 55, 0.9) 100%
+    );
+    animation: pulse-blue 6s infinite ease-in-out;
+}
+
+.focus-folk .presentation-layer .social-links {
+    border-top-color: rgba(95, 113, 97, 0.35);
+}
+
+@keyframes pulse-green {
+    0%   { opacity: 0.25; }
+    50%  { opacity: 0.55; }
+    100% { opacity: 0.25; }
+}
+
 @keyframes pulse-red {
     0% { opacity: 0.3; }
     50% { opacity: 0.6; }
     100% { opacity: 0.3; }
+}
+
+@keyframes pulse-blue {
+    0%   { opacity: 0.22; }
+    50%  { opacity: 0.5; }
+    100% { opacity: 0.22; }
 }
 
 /* Responsive */
@@ -671,6 +813,7 @@ body.ritual-active .presentation-layer {
 
     .social-separator {
         display: none;
+        opacity: 0.35;
     }
 
     .social-link {
@@ -690,5 +833,20 @@ body.ritual-active .presentation-layer {
     }
     .text-scrim {
     padding: 2rem;
+    }
+}
+
+@media (min-width: 1024px) and (min-height: 700px) {
+    .content-layer,
+    .presentation-layer {
+        justify-content: center;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .cycles-grid {
+        gap: 1.5rem;
     }
 }
