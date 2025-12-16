@@ -21,30 +21,30 @@ cards: [
         title: 'Ancient Norse',
         meta: 'The Foundation',
         desc: 'The cultural and mythological ground. A living root system of symbols, practices, and memory from which all expressions emerge.'
-/*         ,
+        ,
         track: {
-        src: 'assets/'
-        } */
+        src: 'assets/ancient_norse.wav'
+        }
     },
     {
         id: 'II',
         title: 'Primal Norse',
         meta: 'The Body',
         desc: 'The active state. Trance, adrenaline, and physical focus. Music as ritual function, designed to alter the body and sharpen intent.'
-/*         ,
+        ,
         track: {
-        src: 'assets/'
-        } */
+        src: 'assets/primal_norse.wav'
+        }
     },
     {
         id: 'III',
         title: 'Norse Folk',
         meta: 'The Spirit',
         desc: 'The reflective state. Story, voice, and melody shaped by place and memory. Music for listening, remembrance, and continuity.'
-/*         ,
+        ,
                 track: {
-        src: 'assets/'
-        } */
+        src: 'assets/norse_folk.wav'
+        }
     }
 ]
     },
