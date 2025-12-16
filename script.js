@@ -103,8 +103,8 @@ cards: [
             'assets/Immersive_Norse_Forest_Rain_Video (1).mp4',
             'assets/Immersive_Norse_Forest_Rain_Video.mp4',
             'assets/Norse_Ritual_Place_in_Forest (3).mp4',
-            'assets/Norse_Ritual_Place_in_Forest (2).mp4',
-            'assets/Immersive_Norse_Forest_Rain_Video (2).mp4'
+            'assets/Immersive_Norse_Forest_Rain_Video (2).mp4',
+            'assets/Norse_Ritual_Place_in_Forest (2).mp4'
         ],
         overlayTitle: 'The Folk Forms',
 cards: [
@@ -328,9 +328,37 @@ function renderPresentationLayer(data) {
 
 // --- VIDEO ENGINE ---
 
+function setVideoOpacityTransitionsEnabled(enabled) {
+    const value = enabled ? '' : 'none';
+    player1.style.transition = value;
+    player2.style.transition = value;
+    // Force style flush so the next toggle doesn't animate unexpectedly
+    void player1.offsetHeight;
+}
+
+function waitForFirstFrame(videoEl) {
+    return new Promise((resolve) => {
+        let resolved = false;
+
+        const done = () => {
+            if (resolved) return;
+            resolved = true;
+            resolve();
+        };
+
+        if (typeof videoEl.requestVideoFrameCallback === 'function') {
+            videoEl.requestVideoFrameCallback(() => done());
+            return;
+        }
+
+        videoEl.addEventListener('loadeddata', done, { once: true });
+        setTimeout(done, 250);
+    });
+}
+
 function changeVideoContext(newPlaylist) {
     // HARD reset of engine state
-    isTransitioning = false;
+    isTransitioning = true;
     currentPlaylistIndex = 0;
     activePlayerId = 1;
 
@@ -342,6 +370,9 @@ function changeVideoContext(newPlaylist) {
     fadeOverlay.classList.add('active');
 
     setTimeout(() => {
+        // Prevent the old visible video from fading out slowly (and flashing during curtain lift)
+        setVideoOpacityTransitionsEnabled(false);
+
         // FULL reset behind curtain
         [player1, player2].forEach(player => {
             player.pause();
@@ -357,13 +388,21 @@ function changeVideoContext(newPlaylist) {
         player1.src = activePlaylist[0];
         player1.load();
 
-        player1.play().then(() => {
-            player1.classList.add('visible');
-            isTransitioning = false;
-            fadeOverlay.classList.remove('active');
-        }).catch(() => {
-            fadeOverlay.classList.remove('active');
-        });
+        player1.play()
+            .then(() => {
+                player1.classList.add('visible');
+                return waitForFirstFrame(player1);
+            })
+            .then(() => {
+                isTransitioning = false;
+                fadeOverlay.classList.remove('active');
+                setVideoOpacityTransitionsEnabled(true);
+            })
+            .catch(() => {
+                isTransitioning = false;
+                fadeOverlay.classList.remove('active');
+                setVideoOpacityTransitionsEnabled(true);
+            });
 
     }, fadeDuration);
 }
