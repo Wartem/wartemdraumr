@@ -4,7 +4,7 @@ const CONTENT = {
     artist: {
         id: 'artist',
         title: 'Wartem Draumr',
-        subtitle: 'Ancient Norse — A Unified Identity',
+        subtitle: 'ANCIENT NORSE — A UNIFIED IDENTITY',
         desc: 'Wartem Draumr is an artistic identity through which Norse-inspired music is explored across two complementary approaches. Working from an Ancient Norse foundation, the music unfolds through two distinct sonic paths. Primal Norse is visceral, bodily, and ritual-driven. Norse Folk is narrative, textural, and rooted in place and memory. Both are inseparable expressions of the same underlying force.',
         playlist: [
             'assets/Nordic_Landscape_Video_Generation.mp4',
@@ -69,7 +69,7 @@ cards: [
         meta: 'The Void • Grounded',
         desc: 'Low-frequency drones and sustained tones designed to slow breathing and heart rate. Clears mental noise and prepares the body for focus before exertion.',
         track: {
-        src: 'assets/ginnungagap_22_odins_fury_120_pre.mp3'
+        src: 'assets/ginnungagap_runaljud.mp3'
         }
     },
     {
@@ -87,7 +87,7 @@ cards: [
         meta: 'The Release • Gathering',
         desc: 'Extended textures and open pacing that allow the nervous system to settle. Supports recovery, grounding, and the return from total physical expenditure.',
         track: {
-        src: 'assets/valhalla_runaljud.mp3'
+        src: 'assets/valhalla_22_odins_fury_120_pre.mp3'
         }
     }
 ]
@@ -165,6 +165,7 @@ const landingTitle = document.getElementById('landing-title');
 const landingSubtitle = document.getElementById('landing-subtitle');
 const landingDesc = document.getElementById('landing-desc');
 const actionContainer = document.getElementById('action-container');
+const landingSocialLinks = document.getElementById('landing-social-links');
 const presentationTitle = document.getElementById('presentation-title');
 const cyclesGrid = document.getElementById('cycles-grid');
 const enterBtn = document.getElementById('enter-btn'); // Will be event-delegated or managed
@@ -224,6 +225,10 @@ function setFocus(focusKey) {
     if (!CONTENT[focusKey]) return;        // validate first
     if (focusKey === currentFocus) return; // prevent redundant render
 
+    if (window.WDPlayer && typeof window.WDPlayer.reset === 'function') {
+        window.WDPlayer.reset();
+    }
+
     const data = CONTENT[focusKey];
     currentFocus = focusKey;
 
@@ -257,7 +262,11 @@ function updateLandingText(data) {
 
     setTimeout(() => {
         landingTitle.textContent = data.title;
-        landingSubtitle.textContent = data.subtitle;
+        if (data.id === 'artist' && data.subtitle === 'ANCIENT NORSE — A UNIFIED IDENTITY') {
+            landingSubtitle.innerHTML = '<span class="subtitle-main">ANCIENT NORSE — A UNIFIED </span><span class="subtitle-break">IDENTITY</span>';
+        } else {
+            landingSubtitle.textContent = data.subtitle;
+        }
         landingDesc.textContent = data.desc;
         
         elements.forEach(el => {
@@ -271,6 +280,7 @@ function updateLandingText(data) {
 
 function renderActionButtons(focusKey) {
     actionContainer.innerHTML = ''; // Clear current
+    if (landingSocialLinks) landingSocialLinks.innerHTML = '';
 
     if (focusKey === 'artist') {
         // Artist Mode: Navigation buttons
@@ -281,13 +291,17 @@ function renderActionButtons(focusKey) {
                 <button class="btn-trance" onclick="setFocus('primal')">Primal Norse</button>
                 <button class="btn-trance" onclick="setFocus('folk')">Norse Folk</button>
             </div>
-        <div class="social-links">
-            <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">Spotify</a>
-            <a href="https://youtube.com/@wartemdraumr?si=x1WlmypHp64JxXkH" class="social-link" target="_blank" rel="noopener noreferrer">YouTube</a>
-            <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">Bandcamp</a>
-        </div>
         `;
         actionContainer.appendChild(navDiv);
+
+        if (landingSocialLinks) {
+            landingSocialLinks.innerHTML = `
+                <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">Spotify</a>
+                <a href="https://youtube.com/@wartemdraumr?si=x1WlmypHp64JxXkH" class="social-link" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">Bandcamp</a>
+            `;
+        }
+
         // Artist mode also keeps the Shield Wall button at the bottom (handled by static HTML #enter-btn)
         enterBtn.style.display = 'inline-block';
         enterBtn.textContent = 'Enter The Shield Wall';
@@ -483,10 +497,18 @@ enterBtn.addEventListener('click', (e) => {
     statusDisplay.textContent = `Focus: ${CONTENT[currentFocus].title} // Deep State`;
 });
 
-exitBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+function standDown() {
+    if (!document.body.classList.contains('ritual-active')) return;
     document.body.classList.remove('ritual-active');
     statusDisplay.textContent = `Focus: ${CONTENT[currentFocus].title} // Active`;
+    if (window.WDPlayer && typeof window.WDPlayer.reset === 'function') {
+        window.WDPlayer.reset();
+    }
+}
+
+exitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    standDown();
 });
 
 function requestFullscreen() {
@@ -528,14 +550,13 @@ function setupKeyboard() {
                 focusOverlay.classList.remove('open');
             } 
             // Or close shield wall if open
-            else if (document.body.classList.contains('ritual-active')) {
-                document.body.classList.remove('ritual-active');
+            else {
+                standDown();
             }
         }
         if (e.key === 'f' || e.key === 'F') {
-            if (!document.body.classList.contains('ritual-active')) {
-                focusOverlay.classList.toggle('open');
-            }
+            if (document.body.classList.contains('ritual-active')) standDown();
+            else focusOverlay.classList.toggle('open');
         }
         if (e.key === 'm' || e.key === 'M') {
             toggleSound();

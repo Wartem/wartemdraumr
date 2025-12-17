@@ -5,12 +5,34 @@
 
     let currentCardId = null;
     let currentCardEl = null;
+    let currentTrackSrc = null;
+
+    function reset() {
+        try {
+            audio.pause();
+            audio.currentTime = 0;
+            audio.removeAttribute('src');
+            audio.load();
+        } catch {}
+
+        document.body.classList.remove('is-playing');
+
+        if (currentCardEl) {
+            currentCardEl.classList.remove('is-active');
+            const line = currentCardEl.querySelector('.progress-line');
+            if (line) line.style.width = '0%';
+        }
+
+        currentCardId = null;
+        currentCardEl = null;
+        currentTrackSrc = null;
+    }
 
     function playTrack(trackSrc, cardId, cardEl) {
         if (!trackSrc) return;
 
         // Same card clicked → toggle pause / resume
-        if (currentCardId === cardId) {
+        if (currentCardId === cardId && currentTrackSrc === trackSrc) {
             if (audio.paused) {
                 audio.play().catch(() => {});
                 document.body.classList.add('is-playing');
@@ -33,6 +55,7 @@
 
         currentCardId = cardId;
         currentCardEl = cardEl;
+        currentTrackSrc = trackSrc;
 
         audio.play().catch(() => {});
         document.body.classList.add('is-playing');
@@ -56,9 +79,11 @@
         if (currentCardEl) currentCardEl.classList.remove('is-active');
         currentCardId = null;
         currentCardEl = null;
+        currentTrackSrc = null;
     });
 
     window.WDPlayer = {
-        playTrack
+        playTrack,
+        reset
     };
 })();

@@ -179,7 +179,7 @@ body {
 
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 
     padding: 2.5rem 3rem 3rem;
 
@@ -206,6 +206,19 @@ body {
     text-transform: uppercase;
 
     color: rgba(255, 255, 255, 0.55);
+}
+
+#landing-social-links {
+    margin-top: clamp(1.6rem, 1.8vh, 1.9rem);
+}
+
+@media (min-width: 1024px) {
+    #landing-social-links {
+        margin-top: calc(clamp(1.6rem, 1.8vh, 1.9rem) + 2rem);
+    }
+        .text-scrim {
+        margin-top: 1.25rem; /* was 1.5rem */
+    }
 }
 
 .social-link {
@@ -385,7 +398,7 @@ body {
     height: 100dvh;
     justify-content: flex-start;
 
-    padding-top: clamp(4.5rem, 10vh, 6rem);
+    padding-top: calc(clamp(4.5rem, 10vh, 6rem) + env(safe-area-inset-top));
     padding-right: 2rem;
     padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
     padding-left: 2rem;
@@ -460,7 +473,43 @@ h1 {
 }
 
 #landing-title {
-    margin-top: 2rem;
+    margin-top: clamp(32px, calc(64px - (100vw - 1000px) * 0.32), 64px);
+}
+
+#landing-subtitle {
+    max-width: 34ch;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+    letter-spacing: clamp(0.18em, 1vw, 0.3em);
+    font-size: clamp(1.05rem, 2.4vw, 1.55rem);
+    font-weight: 500;
+    margin-top: 0.75rem;
+    color: rgba(255, 255, 255, 0.78);
+    text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+}
+
+#landing-subtitle .subtitle-break {
+    display: inline;
+}
+
+#landing-subtitle .subtitle-main {
+    display: inline;
+}
+
+@media (min-width: 1024px) {
+    #landing-subtitle {
+        max-width: 60ch;
+    }
+
+    #landing-subtitle .subtitle-main {
+        white-space: nowrap;
+    }
+
+    #landing-subtitle .subtitle-break {
+        display: block;
+    }
 }
 
 h2 {
@@ -624,7 +673,7 @@ p {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
+    gap: clamp(1.5rem, 3vw, 2rem);
     max-width: 1200px;
 }
 
@@ -835,12 +884,20 @@ body.ritual-active.focus-artist #ritual-overlay {
         gap: 0.25rem;
     }
 
+    #landing-subtitle {
+        margin-top: 1.5rem;
+    }
+
     .content-layer,
     .presentation-layer {
-        padding-top: clamp(4rem, 10vh, 5rem);
+        padding-top: calc(clamp(5rem, 12vh, 7rem) + env(safe-area-inset-top));
         padding-right: 1rem;
         padding-left: 1rem;
-        padding-bottom: calc(3rem + env(safe-area-inset-bottom));
+        padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+    }
+
+    .status-text {
+        bottom: calc(1.5rem + env(safe-area-inset-bottom));
     }
 
      .social-links {
@@ -870,32 +927,10 @@ body.ritual-active.focus-artist #ritual-overlay {
         flex-direction: column;
     }
     .text-scrim {
-        padding: clamp(1.5rem, 4vw, 2rem) clamp(1.25rem, 4vw, 2rem);
-    }
-}
-
-@media (min-width: 1024px) and (min-height: 700px) {
-    .content-layer,
-    .presentation-layer {
-        justify-content: center;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }
-
-    .content-layer {
-        padding-top: 2rem;
-    }
-}
-
-@media (max-width: 1024px) {
-    .cycles-grid {
-        gap: 1.5rem;
-    }
-}
-
-@media (max-width: 1000px) {
-    #landing-title {
-        margin-top: 4rem;
+        padding-top: clamp(1.25rem, 4vw, 1.75rem);   /* −0.25 */
+        padding-bottom: clamp(1.5rem, 4vw, 2rem);
+        padding-left: clamp(1.25rem, 4vw, 2rem);
+        padding-right: clamp(1.25rem, 4vw, 2rem);
     }
 }
 
