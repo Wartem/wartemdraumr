@@ -5,17 +5,10 @@
     box-sizing: border-box;
 }
 
-/* body, html {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background-color: #050505; /* Deep black fallback */
-    /* font-family: 'Raleway', sans-serif; */
-    /* color: #e0e0e0;  *//* Off-white/Bone color */
-    /* -webkit-font-smoothing: antialiased; */
-/*     overflow-x: hidden;
-    overflow-y: auto; */
-/* }  */
+:root {
+    --focus-switch-fade-ms: 1200ms;
+    --video-crossfade-ms: 2000ms;
+}
 
 html,
 body {
@@ -56,8 +49,11 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 2000ms ease-in-out; /* The Cross-fade duration */
-    will-change: opacity;
+    transition: opacity var(--video-crossfade-ms) ease-in-out; /* The Cross-fade duration */
+    will-change: opacity, transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     opacity: 0;
     z-index: 0;
 }
@@ -124,15 +120,11 @@ body {
     height: 100vh;
     height: 100dvh;
     z-index: 5;
-    background: radial-gradient(
-        circle, 
-        transparent 20%, 
-        rgba(100, 0, 0, 0.4) 80%,
-        rgba(50, 0, 0, 0.9) 100%
-    );
+    /* Background color is focus-specific (see `.focus-* #ritual-overlay`) */
+    background: transparent;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 3s ease-in-out;
+    transition: opacity 2s ease-in-out;
     mix-blend-mode: overlay;
 }
 
@@ -144,35 +136,18 @@ body {
     height: 100vh;
     height: 100dvh;
     background: black;
-    z-index: 6;
+    /* Above content (z=10) and UI controls (z=50), below the focus modal (z=60) */
+    z-index: 55;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 1200ms ease;
+    transition: opacity var(--focus-switch-fade-ms) ease;
 }
 
 #fade-overlay.active {
     opacity: 1;
-    transition: opacity 0s;
 }
 
 /* --- UI LAYERS --- */
-
-/* Focus Trigger (Top Left) */
-/* .ui-trigger {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    z-index: 50;
-    background: none;
-    border: none;
-    color: #555;
-    font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: color 0.3s;
-} */
 
 .text-scrim {
     position: relative;
@@ -182,7 +157,7 @@ body {
     margin-right: auto;
     margin-top: 1.5rem;
 
-    padding: 2.5rem 3rem 3rem;
+    padding: 2.5rem 3rem 2rem;
 
     border-radius: 6px;
 
@@ -213,6 +188,12 @@ body {
     margin-top: clamp(1.6rem, 1.8vh, 1.9rem);
 }
 
+@media (max-width: 1023.98px) {
+    #landing-social-links {
+        margin-top: calc(clamp(1.6rem, 1.8vh, 1.9rem) + 1rem);
+    }
+}
+
 @media (min-width: 1024px) {
     #landing-social-links {
         margin-top: calc(clamp(1.6rem, 1.8vh, 1.9rem) + 2rem);
@@ -239,28 +220,6 @@ body {
     margin: 0 0.6rem;
     opacity: 0.4;
 }
-
-/* .text-scrim-mini {
-    position: relative;
-    max-width: 72ch;
-    opacity: 0.85;
-
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2.25rem;
-
-    padding: 1.25rem 3rem 1.75rem;
-
-    border-radius: 6px;
-
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.38) 0%,
-        rgba(0, 0, 0, 0.28) 50%,
-        rgba(0, 0, 0, 0.12) 85%,
-        rgba(0, 0, 0, 0.0) 100%
-    );
-} */
 
 .text-scrim p {
     color: rgba(255, 255, 255, 0.88);
@@ -449,8 +408,8 @@ body {
     overflow: hidden;
     background: rgba(0,0,0,0.7);
     backdrop-filter: blur(5px);
-    transform: scale(0.98);
-    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out, visibility 0s linear 1.5s;
+    transform: translateZ(0) scale(0.98);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out, visibility 0s linear 1s;
 }
 
 @keyframes fadeInUp {
@@ -557,9 +516,17 @@ p {
     margin: 0 10px;
 }
 
+#enter-btn {
+    margin-top: 3rem;
+}
+
 #action-container {
-    padding-top: 0.5rem;
-    padding-bottom: 2rem;
+    padding-top: 0;
+}
+
+#action-container:empty {
+    display: none;
+    padding: 0;
 }
 
 .btn-trance:hover {
@@ -605,6 +572,43 @@ p {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+}
+
+.focus-sigil {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    line-height: 1;
+    color: rgba(220, 200, 160, 0.95);
+    opacity: 0.18;
+    transition: opacity 0.6s ease, text-shadow 0.6s ease, transform 0.6s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.focus-sigil .rune {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(6rem, 18vw, 14rem);
+    line-height: 0.85;
+    letter-spacing: 0;
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+.focus-sigil:hover,
+.focus-sigil:focus-visible {
+    opacity: 0.35;
+    text-shadow: 0 0 40px rgba(220, 200, 160, 0.22);
+    transform: translateY(-1px);
+}
+
+.focus-sigil:focus-visible {
+    outline: 1px solid rgba(220, 200, 160, 0.35);
+    outline-offset: 6px;
 }
 
 .focus-buttons-row {
@@ -675,6 +679,10 @@ p {
 #landing-desc {
     line-height: 1.7;
     letter-spacing: 0.045em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 0;
 }
 
 .cycle-card {
@@ -753,6 +761,34 @@ body.ritual-active #ritual-overlay {
     /* animation: pulse-red 5s infinite ease-in-out; */
 }
 
+/* Keep overlay color consistent while fading out of ritual mode */
+body.focus-primal #ritual-overlay {
+    background: radial-gradient(
+        circle,
+        transparent 20%,
+        rgba(100, 0, 0, 0.4) 80%,
+        rgba(50, 0, 0, 0.9) 100%
+    );
+}
+
+body.focus-folk #ritual-overlay {
+    background: radial-gradient(
+        circle,
+        transparent 20%,
+        rgba(40, 70, 40, 0.45) 80%,
+        rgba(20, 40, 20, 0.9) 100%
+    );
+}
+
+body.focus-artist #ritual-overlay {
+    background: radial-gradient(
+        circle,
+        transparent 20%,
+        rgba(40, 60, 90, 0.45) 80%,
+        rgba(20, 30, 55, 0.9) 100%
+    );
+}
+
 /* Hide Landing Page */
 body.ritual-active .content-layer#landing-layer {
     opacity: 0;
@@ -766,32 +802,10 @@ body.ritual-active .presentation-layer {
     pointer-events: all;
     visibility: visible;
     overflow-y: auto;
-    transform: scale(1);
+    transform: translateZ(0) scale(1);
     transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out, visibility 0s linear 0s;
     transition-delay: 0.5s;
 }
-
-/* .presentation-layer .social-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-
-    width: fit-content;
-    margin: 0 auto;
-
-    padding: 1rem 1.5rem;
-
-    border-top: 1px solid rgba(255,255,255,0.08);
-
-    letter-spacing: 0.22em;
-  
-    margin-top: 0.75rem;
-    padding-top: 1.5rem;
-
-    margin-left: auto;
-    margin-right: auto;
-} */
 
 .presentation-layer .social-links {
     width: fit-content;
@@ -815,32 +829,14 @@ body.ritual-active .presentation-layer {
 }
 
 body.ritual-active.focus-primal #ritual-overlay {
-    background: radial-gradient(
-        circle,
-        transparent 20%,
-        rgba(100, 0, 0, 0.4) 80%,
-        rgba(50, 0, 0, 0.9) 100%
-    );
     animation: pulse-red 5s infinite ease-in-out;
 }
 
 body.ritual-active.focus-folk #ritual-overlay {
-    background: radial-gradient(
-        circle,
-        transparent 20%,
-        rgba(40, 70, 40, 0.45) 80%,
-        rgba(20, 40, 20, 0.9) 100%
-    );
     animation: pulse-green 6s infinite ease-in-out;
 }
 
 body.ritual-active.focus-artist #ritual-overlay {
-    background: radial-gradient(
-        circle,
-        transparent 20%,
-        rgba(40, 60, 90, 0.45) 80%,
-        rgba(20, 30, 55, 0.9) 100%
-    );
     animation: pulse-blue 6s infinite ease-in-out;
 }
 

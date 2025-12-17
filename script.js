@@ -138,15 +138,14 @@ cards: [
     }
 };
 
-const FADE_DURATIONS = {
-    artist: 1500,
-    primal: 1400,
-    folk: 1500
-};
+// Controls crossfade timing BETWEEN videos within the same focus playlist.
+// Keep this aligned with `.bg-video { transition: opacity ... }` in `style.css`.
+const VIDEO_CROSSFADE_MS = 2000;
 
-const FOCUS_SWITCH_FADE_MS = 1200;
+// Controls the "black curtain" fade dfuration when switching focus.
+const FOCUS_SWITCH_FADE_MS = 3500;
 
-// --- STATE VARIABLES ---
+// --- STATE VARIABLES ---f
 let currentFocus = null; // 'artist'; // Default
 let activePlaylist = [];
 let currentPlaylistIndex = 0;
@@ -185,6 +184,9 @@ const focusOptions = document.querySelectorAll('.focus-list button');
 let revealed = false;
 
 function init() {
+    document.documentElement.style.setProperty('--focus-switch-fade-ms', `${FOCUS_SWITCH_FADE_MS}ms`);
+    document.documentElement.style.setProperty('--video-crossfade-ms', `${VIDEO_CROSSFADE_MS}ms`);
+
     // Set Initial State
     setFocus('artist');
 
@@ -199,10 +201,6 @@ function init() {
     
     // Status
     statusDisplay.textContent = "Identity: Wartem Draumr // Active";
-}
-
-function getFadeDuration() {
-    return FADE_DURATIONS[currentFocus] || 1400;
 }
 
 const soundTrigger = document.getElementById('sound-trigger');
@@ -258,6 +256,28 @@ function setFocus(focusKey) {
     statusDisplay.textContent = `Focus: ${data.title} // Active`;
 }
 
+let landingFocusIntent = 0;
+
+function switchFocusFromLanding(focusKey) {
+    if (!CONTENT[focusKey]) return;
+    if (focusKey === currentFocus) return;
+
+    const intent = ++landingFocusIntent;
+
+    // Fade to black (instead of snapping to black) when switching via landing buttons.
+    if (!fadeOverlay.classList.contains('active')) {
+        fadeOverlay.style.transition = '';
+        fadeOverlay.classList.add('active');
+        requestAnimationFrame(() => {
+            if (intent !== landingFocusIntent) return;
+            setFocus(focusKey);
+        });
+        return;
+    }
+
+    setFocus(focusKey);
+}
+
 function updateLandingText(data) {
     // Simple fade out/in effect for text
     const elements = [landingTitle, landingSubtitle, landingDesc];
@@ -287,16 +307,23 @@ function renderActionButtons(focusKey) {
     if (landingSocialLinks) landingSocialLinks.innerHTML = '';
 
     if (focusKey === 'artist') {
-        // Artist Mode: Navigation buttons
+        // Artist Mode: single Focus CTA
         const navDiv = document.createElement('div');
         navDiv.className = 'artist-actions';
         navDiv.innerHTML = `
-            <div class="focus-buttons-row">
-                <button class="btn-trance" onclick="setFocus('primal')">Primal Norse</button>
-                <button class="btn-trance" onclick="setFocus('folk')">Norse Folk</button>
-            </div>
+            <button id="focus-sigil" class="focus-sigil" type="button" aria-label="Select Focus">
+                <span class="rune">ᚠ</span>
+            </button>
         `;
         actionContainer.appendChild(navDiv);
+
+        const sigilBtn = navDiv.querySelector('#focus-sigil');
+        if (sigilBtn) {
+            sigilBtn.addEventListener('click', () => {
+                if (focusTrigger) focusTrigger.click();
+                else if (focusOverlay) focusOverlay.classList.add('open');
+            });
+        }
 
         if (landingSocialLinks) {
             landingSocialLinks.innerHTML = `
@@ -364,14 +391,32 @@ function waitForFirstFrame(videoEl) {
             resolve();
         };
 
+        const onNextPaint = () => requestAnimationFrame(done);
+
         if (typeof videoEl.requestVideoFrameCallback === 'function') {
             videoEl.requestVideoFrameCallback(() => done());
             return;
         }
 
-        videoEl.addEventListener('loadeddata', done, { once: true });
+        if (videoEl.readyState >= 2) {
+            onNextPaint();
+            return;
+        }
+
+        videoEl.addEventListener('loadeddata', onNextPaint, { once: true });
         setTimeout(done, 250);
     });
+}
+
+function ensureActiveVideoPlaying() {
+    if (fadeOverlay.classList.contains('active')) return;
+
+    const activeVid = activePlayerId === 1 ? player1 : player2;
+    if (!activeVid || !activeVid.src) return;
+
+    // Some browsers can stall video decode when large composited layers toggle quickly.
+    // A best-effort play() nudge keeps playback moving without affecting timing.
+    activeVid.play().catch(() => {});
 }
 
 async function changeVideoContext(newPlaylist) {
@@ -388,11 +433,22 @@ async function changeVideoContext(newPlaylist) {
 
     activePlaylist = newPlaylist;
 
+    const curtainAlreadyActive = fadeOverlay.classList.contains('active');
+
     // Drop curtain immediately (avoid 1-frame flash of previous focus)
-    fadeOverlay.style.transition = 'none';
-    fadeOverlay.style.opacity = '1';
-    fadeOverlay.classList.add('active');
-    void fadeOverlay.offsetHeight;
+    if (!curtainAlreadyActive) {
+        fadeOverlay.style.transition = 'none';
+        fadeOverlay.classList.add('active');
+        void fadeOverlay.offsetHeight;
+        // Restore the CSS-driven transition so the reveal animates with --focus-switch-fade-ms.
+        fadeOverlay.style.transition = '';
+        await new Promise(requestAnimationFrame);
+    } else {
+        // If something else already raised the curtain (e.g. landing switch fade),
+        // don't override it (which would cause a "snap to black").
+        fadeOverlay.style.transition = '';
+        await new Promise(requestAnimationFrame);
+    }
     if (token !== videoContextToken) return;
 
     // Prevent the old visible video from fading out slowly (and flashing during curtain lift)
@@ -431,8 +487,8 @@ async function changeVideoContext(newPlaylist) {
         if (token !== videoContextToken) return;
     }
 
-    fadeOverlay.style.transition = '';
-    fadeOverlay.style.opacity = '';
+    // Reveal (fade back in) using CSS var duration
+    await new Promise(requestAnimationFrame);
     fadeOverlay.classList.remove('active');
     setVideoOpacityTransitionsEnabled(true);
 
@@ -446,10 +502,11 @@ function performCrossfade() {
     isTransitioning = true;
     const token = videoContextToken;
 
-    const fadeDuration = getFadeDuration();
+    const fadeDuration = VIDEO_CROSSFADE_MS;
 
     const currentVid = activePlayerId === 1 ? player1 : player2;
     const nextVid = activePlayerId === 1 ? player2 : player1;
+    const nextPlayerId = activePlayerId === 1 ? 2 : 1;
     const nextIdx = (currentPlaylistIndex + 1) % activePlaylist.length;
 
     if (!nextVid.src.includes(activePlaylist[nextIdx])) {
@@ -462,14 +519,15 @@ function performCrossfade() {
         nextVid.classList.add('visible');
         currentVid.classList.remove('visible');
 
+        // Update state as soon as we swap visibility so time/ended handlers track the correct player.
+        activePlayerId = nextPlayerId;
+        currentPlaylistIndex = nextIdx;
+
         if (crossfadeTimer) clearTimeout(crossfadeTimer);
         crossfadeTimer = setTimeout(() => {
             if (token !== videoContextToken) return;
             currentVid.pause();
             currentVid.currentTime = 0;
-
-            activePlayerId = activePlayerId === 1 ? 2 : 1;
-            currentPlaylistIndex = nextIdx;
 
             const futureIdx = (currentPlaylistIndex + 1) % activePlaylist.length;
             currentVid.src = activePlaylist[futureIdx];
@@ -493,7 +551,7 @@ function checkTime(e) {
     if (player !== activePlayer) return;
     if (!player.duration || isNaN(player.duration)) return;
 
-    const fadeDuration = getFadeDuration();
+    const fadeDuration = VIDEO_CROSSFADE_MS;
     const remaining = player.duration - player.currentTime;
 
     if (
@@ -505,8 +563,28 @@ function checkTime(e) {
     }
 }
 
+function handleVideoEnded(e) {
+    if (!activePlaylist || activePlaylist.length === 0) return;
+
+    const activePlayer = activePlayerId === 1 ? player1 : player2;
+    if (e.target !== activePlayer) return;
+
+    // Fallback: if a video reaches the end (e.g. missed `timeupdate`), keep the playlist moving.
+    if (activePlaylist.length === 1) {
+        try {
+            activePlayer.currentTime = 0;
+        } catch (e) {}
+        activePlayer.play().catch(() => {});
+        return;
+    }
+
+    if (!isTransitioning) performCrossfade();
+}
+
 player1.addEventListener('timeupdate', checkTime);
 player2.addEventListener('timeupdate', checkTime);
+player1.addEventListener('ended', handleVideoEnded);
+player2.addEventListener('ended', handleVideoEnded);
 
 // --- INTERACTION ---
 
@@ -522,6 +600,7 @@ enterBtn.addEventListener('click', (e) => {
     e.preventDefault();
     document.body.classList.add('ritual-active');
     statusDisplay.textContent = `Focus: ${CONTENT[currentFocus].title} // Deep State`;
+    requestAnimationFrame(ensureActiveVideoPlaying);
 });
 
 function standDown() {
@@ -531,6 +610,7 @@ function standDown() {
     if (window.WDPlayer && typeof window.WDPlayer.reset === 'function') {
         window.WDPlayer.reset();
     }
+    requestAnimationFrame(ensureActiveVideoPlaying);
 }
 
 exitBtn.addEventListener('click', (e) => {

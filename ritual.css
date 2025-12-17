@@ -16,8 +16,8 @@ body.is-playing .vignette {
     );
 }
 
-/* Very subtle global tightening */
-body.is-playing {
+/* Very subtle global tightening (avoid filtering <body>, which breaks fixed positioning on some browsers) */
+body.is-playing #video-container {
     filter: contrast(1.025);
 }
 
@@ -64,4 +64,3 @@ body.is-playing {
         opacity: 0.055;
     }
 }
-
