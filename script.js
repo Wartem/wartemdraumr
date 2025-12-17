@@ -4,7 +4,7 @@ const CONTENT = {
     artist: {
         id: 'artist',
         title: 'Wartem Draumr',
-        subtitle: 'ANCIENT NORSE — A UNIFIED IDENTITY',
+        subtitle: 'ANCIENT NORSE \u2014 A UNIFIED IDENTITY',
         desc: 'Wartem Draumr is an artistic identity through which Norse-inspired music is explored across two complementary approaches. Working from an Ancient Norse foundation, the music unfolds through two distinct sonic paths. Primal Norse is visceral, bodily, and ritual-driven. Norse Folk is narrative, textural, and rooted in place and memory. Both are inseparable expressions of the same underlying force.',
         playlist: [
             'assets/Nordic_Landscape_Video_Generation.mp4',
@@ -66,26 +66,25 @@ cards: [
     {
         id: 'I',
         title: 'Ginnungagap',
-        meta: 'The Void • Grounded',
-        desc: 'Low-frequency drones and sustained tones designed to slow breathing and heart rate. Clears mental noise and prepares the body for focus before exertion.',
-        track: {
+        meta: 'The Void \u2014 Weighted',
+        desc: 'Sustained motion and variable density that establish gravity and orientation. Builds internal tension and readiness without urgency, forming a foundation before force is directed.',        track: {
         src: 'assets/ginnungagap_runaljud.mp3'
         }
     },
     {
         id: 'II',
-        title: 'Berserkergang',
-        meta: 'The Fury • Surging',
-        desc: 'Aggressive, polyrhythmic percussion and driving patterns that elevate adrenaline and trigger the fight response. Built for output, force, and forward momentum.',
+        title: 'Berserksgangr | Hamask',
+        meta: 'The Fury \u2014 Unleashed',
+        desc: 'A progressive surge from agitation into trance, where restraint dissolves but direction remains. Rhythm overtakes voice as rage is absorbed into automatic motion, reaching a state of relentless urgency, confidence, and decisive force.',
         track: {
         src: 'assets/berserkergang_hamask_160_pre.mp3'
         }
     },
     {
         id: 'III',
-        title: 'Valhalla',
-        meta: 'The Release • Gathering',
-        desc: 'Extended textures and open pacing that allow the nervous system to settle. Supports recovery, grounding, and the return from total physical expenditure.',
+        title: 'Valhǫll',
+        meta: 'The Hall \u2014 Tempered',
+        desc: 'Steady, driving motion and controlled density that hold aggression in check. Channels elevated intensity into discipline, focus, and preparation for conflict.',
         track: {
         src: 'assets/valhalla_22_odins_fury_120_pre.mp3'
         }
@@ -111,7 +110,7 @@ cards: [
     {
         id: 'I',
         title: 'Saga',
-        meta: 'The Story • Grounded',
+        meta: 'The Story \u2014 Grounded',
         desc: 'Melodic structures built around voice and string, intended to carry narrative over time. Supports listening, recall, and the transmission of memory through song.',
         track: {
         src: 'assets/saga_1_restless_lover_2_k100_pre.mp3'
@@ -120,7 +119,7 @@ cards: [
     {
         id: 'II',
         title: 'Hearth',
-        meta: 'The Home • Driving',
+        meta: 'The Home \u2014 Driving',
         desc: 'Close, grounded textures shaped by repetition and warmth. Creates a sense of safety, continuity, and presence within a shared space.',
         track: {
         src: 'assets/hearth_12_forns_sagna_k60_pre.mp3'
@@ -129,7 +128,7 @@ cards: [
     {
         id: 'III',
         title: 'Voyage',
-        meta: 'The Horizon • Flowing',
+        meta: 'The Horizon \u2014 Flowing',
         desc: 'Extended, unfolding compositions that accompany movement and transition. Orients attention outward toward landscape, distance, and passage.',
         track: {
         src: 'assets/voy_16_Echoes_Ancients_pre.mp3'
@@ -145,12 +144,16 @@ const FADE_DURATIONS = {
     folk: 1500
 };
 
+const FOCUS_SWITCH_FADE_MS = 1200;
+
 // --- STATE VARIABLES ---
 let currentFocus = null; // 'artist'; // Default
 let activePlaylist = [];
 let currentPlaylistIndex = 0;
 let activePlayerId = 1; 
 let isTransitioning = false;
+let videoContextToken = 0;
+let crossfadeTimer = null;
 let autoCycleTimer = null;
 let soundEnabled = false;
 
@@ -214,7 +217,7 @@ function toggleSound() {
         }
     });
 
-    soundTrigger.textContent = soundEnabled ? 'Sound: On' : 'Sound: Off [M]';
+    soundTrigger.textContent = soundEnabled ? 'Focus Sound: On' : 'Focus Sound: Off [M]';
 }
 
 soundTrigger.addEventListener('click', toggleSound);
@@ -236,7 +239,8 @@ function setFocus(focusKey) {
     document.title = `${data.title} | Focus`;
 
     // 2. CSS Theming hook (for specific colors)
-    document.body.className = `focus-${focusKey}`; // Clears 'ritual-active'
+    Object.keys(CONTENT).forEach(key => document.body.classList.remove(`focus-${key}`));
+    document.body.classList.add(`focus-${focusKey}`);
 
     // 3. Animate Text Content Swap
     updateLandingText(data);
@@ -262,8 +266,8 @@ function updateLandingText(data) {
 
     setTimeout(() => {
         landingTitle.textContent = data.title;
-        if (data.id === 'artist' && data.subtitle === 'ANCIENT NORSE — A UNIFIED IDENTITY') {
-            landingSubtitle.innerHTML = '<span class="subtitle-main">ANCIENT NORSE — A UNIFIED </span><span class="subtitle-break">IDENTITY</span>';
+        if (data.id === 'artist') {
+            landingSubtitle.innerHTML = '<span class="subtitle-main">ANCIENT NORSE &mdash; A UNIFIED </span><span class="subtitle-break">IDENTITY</span>';
         } else {
             landingSubtitle.textContent = data.subtitle;
         }
@@ -297,7 +301,7 @@ function renderActionButtons(focusKey) {
         if (landingSocialLinks) {
             landingSocialLinks.innerHTML = `
                 <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">Spotify</a>
-                <a href="https://youtube.com/@wartemdraumr?si=x1WlmypHp64JxXkH" class="social-link" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a href="http://www.youtube.com/@WartemDraumr" class="social-link" target="_blank" rel="noopener noreferrer">YouTube</a>
                 <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">Bandcamp</a>
             `;
         }
@@ -370,59 +374,77 @@ function waitForFirstFrame(videoEl) {
     });
 }
 
-function changeVideoContext(newPlaylist) {
+async function changeVideoContext(newPlaylist) {
     // HARD reset of engine state
     isTransitioning = true;
+    videoContextToken += 1;
+    const token = videoContextToken;
+    if (crossfadeTimer) {
+        clearTimeout(crossfadeTimer);
+        crossfadeTimer = null;
+    }
     currentPlaylistIndex = 0;
     activePlayerId = 1;
 
     activePlaylist = newPlaylist;
 
-    const fadeDuration = getFadeDuration();
-
-    // Drop curtain
+    // Drop curtain immediately (avoid 1-frame flash of previous focus)
+    fadeOverlay.style.transition = 'none';
+    fadeOverlay.style.opacity = '1';
     fadeOverlay.classList.add('active');
+    void fadeOverlay.offsetHeight;
+    if (token !== videoContextToken) return;
 
-    setTimeout(() => {
-        // Prevent the old visible video from fading out slowly (and flashing during curtain lift)
-        setVideoOpacityTransitionsEnabled(false);
+    // Prevent the old visible video from fading out slowly (and flashing during curtain lift)
+    setVideoOpacityTransitionsEnabled(false);
 
-        // FULL reset behind curtain
-        [player1, player2].forEach(player => {
-            player.pause();
-            player.currentTime = 0;
-            player.classList.remove('visible');
+    // FULL reset behind curtain
+    [player1, player2].forEach(player => {
+        player.pause();
+        player.currentTime = 0;
+        player.classList.remove('visible');
 
-            // CRITICAL: remove stale source
-            player.removeAttribute('src');
-            player.load();
-        });
+        // CRITICAL: remove stale source
+        player.removeAttribute('src');
+        player.load();
+    });
 
-        // Load ONLY the first video into player1
+    // Load ONLY the first video into player1
+    if (!activePlaylist || activePlaylist.length === 0) {
+        isTransitioning = false;
+        fadeOverlay.classList.remove('active');
+        setVideoOpacityTransitionsEnabled(true);
+        return;
+    }
+
+    try {
         player1.src = activePlaylist[0];
         player1.load();
 
-        player1.play()
-            .then(() => {
-                player1.classList.add('visible');
-                return waitForFirstFrame(player1);
-            })
-            .then(() => {
-                isTransitioning = false;
-                fadeOverlay.classList.remove('active');
-                setVideoOpacityTransitionsEnabled(true);
-            })
-            .catch(() => {
-                isTransitioning = false;
-                fadeOverlay.classList.remove('active');
-                setVideoOpacityTransitionsEnabled(true);
-            });
+        await player1.play();
+        if (token !== videoContextToken) return;
 
-    }, fadeDuration);
+        player1.classList.add('visible');
+        await waitForFirstFrame(player1);
+        if (token !== videoContextToken) return;
+    } catch (e) {
+        if (token !== videoContextToken) return;
+    }
+
+    fadeOverlay.style.transition = '';
+    fadeOverlay.style.opacity = '';
+    fadeOverlay.classList.remove('active');
+    setVideoOpacityTransitionsEnabled(true);
+
+    await new Promise(resolve => setTimeout(resolve, FOCUS_SWITCH_FADE_MS));
+    if (token !== videoContextToken) return;
+
+    isTransitioning = false;
 }
 
 function performCrossfade() {
     isTransitioning = true;
+    const token = videoContextToken;
 
     const fadeDuration = getFadeDuration();
 
@@ -436,10 +458,13 @@ function performCrossfade() {
     }
 
     nextVid.play().then(() => {
+        if (token !== videoContextToken) return;
         nextVid.classList.add('visible');
         currentVid.classList.remove('visible');
 
-        setTimeout(() => {
+        if (crossfadeTimer) clearTimeout(crossfadeTimer);
+        crossfadeTimer = setTimeout(() => {
+            if (token !== videoContextToken) return;
             currentVid.pause();
             currentVid.currentTime = 0;
 
@@ -451,8 +476,10 @@ function performCrossfade() {
             currentVid.load();
 
             isTransitioning = false;
+            crossfadeTimer = null;
         }, fadeDuration);
     }).catch(() => {
+        if (token !== videoContextToken) return;
         isTransitioning = false;
     });
 }

@@ -147,11 +147,12 @@ body {
     z-index: 6;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 1s ease;
+    transition: opacity 1200ms ease;
 }
 
 #fade-overlay.active {
     opacity: 1;
+    transition: opacity 0s;
 }
 
 /* --- UI LAYERS --- */
@@ -216,20 +217,22 @@ body {
     #landing-social-links {
         margin-top: calc(clamp(1.6rem, 1.8vh, 1.9rem) + 2rem);
     }
-        .text-scrim {
-        margin-top: 1.25rem; /* was 1.5rem */
-    }
 }
 
-.social-link {
-    color: inherit;
+.social-links .social-link {
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+
+    color: rgba(255, 255, 255, 0.65);
     text-decoration: none;
-    transition: color 0.2s ease;
+
+    transition: color 0.2s ease, opacity 0.2s ease;
 }
 
-.social-link:hover,
-.social-link:focus {
-    color: rgba(255, 255, 255, 0.9);
+.social-links .social-link:hover,
+.social-links .social-link:focus {
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .social-separator {
@@ -611,21 +614,7 @@ p {
     margin-bottom: 1rem;
 }
 
-.social-link {
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
 
-    color: rgba(255, 255, 255, 0.65);
-    text-decoration: none;
-
-    transition: color 0.2s ease, opacity 0.2s ease;
-}
-
-.social-link:hover,
-.social-link:focus {
-    color: rgba(255, 255, 255, 0.95);
-}
 
 /* --- STATUS TEXT --- */
 .status-text {

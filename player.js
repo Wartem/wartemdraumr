@@ -13,7 +13,7 @@
             audio.currentTime = 0;
             audio.removeAttribute('src');
             audio.load();
-        } catch {}
+        } catch (e) {}
 
         document.body.classList.remove('is-playing');
 
