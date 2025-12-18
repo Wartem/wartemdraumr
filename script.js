@@ -39,7 +39,7 @@ const CONTENT = {
             {
                 id: 'III',
                 title: 'Norse Folk',
-                meta: 'The Spirit',
+                meta: 'The Story & the Spirit',
                 desc: 'The reflective state. Story, voice, and melody shaped by place and memory. Music for listening, remembrance, and continuity.'
                 ,
                 track: {
@@ -109,8 +109,8 @@ const CONTENT = {
             {
                 id: 'I',
                 title: 'Saga',
-                meta: 'The Story \u2014 Grounded',
-                desc: 'Melodic structures built around voice and string, intended to carry narrative over time. Supports listening, recall, and the transmission of memory through song.',
+                meta: 'The Story \u2014 Gravitas',
+                desc: 'Recounting unfolds through focused vocal presence and deliberate progression. Draws listeners in through suspense and authority rather than comfort, sustaining tension as meaning unfolds over time.',
                 track: {
                     src: 'assets/saga_1_restless_lover_2_k100_pre.mp3'
                 }
@@ -118,8 +118,8 @@ const CONTENT = {
             {
                 id: 'II',
                 title: 'Hearth',
-                meta: 'The Home \u2014 Driving',
-                desc: 'Close, grounded textures shaped by repetition and warmth. Creates a sense of safety, continuity, and presence within a shared space.',
+                meta: 'The Home \u2014 Gathering',
+                desc: 'Warm, grounded forms led by a clear vocal line and supported by collective presence. Carries story through song while surrounding it with shared voices, creating safety, continuity, and belonging within a lived space.',
                 track: {
                     src: 'assets/hearth_12_forns_sagna_k60_pre.mp3'
                 }
@@ -127,8 +127,8 @@ const CONTENT = {
             {
                 id: 'III',
                 title: 'Voyage',
-                meta: 'The Horizon \u2014 Flowing',
-                desc: 'Extended, unfolding compositions that accompany movement and transition. Orients attention outward toward landscape, distance, and passage.',
+                meta: 'The Horizon \u2014 Enveloping',
+                desc: 'Extended, layered forms that surround the listener with mass and momentum. Dense textures and converging motion create a sense of passage through scale rather than distance, drawing attention inward toward immersion, continuity, and collective presence.',
                 track: {
                     src: 'assets/voy_16_Echoes_Ancients_pre.mp3'
                 }
