@@ -72,7 +72,7 @@ const CONTENT = {
             },
             {
                 id: 'II',
-                title: 'Berserksgangr | Hamask',
+                title: 'Berserksgangr',
                 meta: 'The Fury \u2014 Unleashed',
                 desc: 'A progressive surge from agitation into trance, where restraint dissolves but direction remains. Rhythm overtakes voice as rage is absorbed into automatic motion, reaching a state of relentless urgency, confidence, and decisive force.',
                 track: {
