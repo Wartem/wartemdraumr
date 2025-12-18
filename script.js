@@ -15,38 +15,38 @@ const CONTENT = {
             'assets/Nordic_Landscape_Video_Generation (5).mp4',
         ],
         overlayTitle: 'Map of Forms',
-cards: [
-    {
-        id: 'I',
-        title: 'Ancient Norse',
-        meta: 'The Foundation',
-        desc: 'The cultural and mythological ground. A living root system of symbols, practices, and memory from which all expressions emerge.'
-        ,
-        track: {
-        src: 'assets/ancient_norse.wav'
-        }
-    },
-    {
-        id: 'II',
-        title: 'Primal Norse',
-        meta: 'The Body',
-        desc: 'The active state. Trance, adrenaline, and physical focus. Music as ritual function, designed to alter the body and sharpen intent.'
-        ,
-        track: {
-        src: 'assets/primal_norse.wav'
-        }
-    },
-    {
-        id: 'III',
-        title: 'Norse Folk',
-        meta: 'The Spirit',
-        desc: 'The reflective state. Story, voice, and melody shaped by place and memory. Music for listening, remembrance, and continuity.'
-        ,
+        cards: [
+            {
+                id: 'I',
+                title: 'Ancient Norse',
+                meta: 'The Foundation',
+                desc: 'The cultural and mythological ground. A living root system of symbols, practices, and memory from which all expressions emerge.'
+                ,
                 track: {
-        src: 'assets/norse_folk.wav'
-        }
-    }
-]
+                    src: 'assets/ancient_norse.wav'
+                }
+            },
+            {
+                id: 'II',
+                title: 'Primal Norse',
+                meta: 'The Body',
+                desc: 'The active state. Trance, adrenaline, and physical focus. Music as ritual function, designed to alter the body and sharpen intent.'
+                ,
+                track: {
+                    src: 'assets/primal_norse.wav'
+                }
+            },
+            {
+                id: 'III',
+                title: 'Norse Folk',
+                meta: 'The Spirit',
+                desc: 'The reflective state. Story, voice, and melody shaped by place and memory. Music for listening, remembrance, and continuity.'
+                ,
+                track: {
+                    src: 'assets/norse_folk.wav'
+                }
+            }
+        ]
     },
     primal: {
         id: 'primal',
@@ -54,42 +54,41 @@ cards: [
         subtitle: 'The Body & The Spirit',
         desc: 'Primal Norse is music designed for altered physical states. It is rhythm-driven, forceful, and functional, built to sharpen focus, elevate adrenaline, and carry the body through exertion and trance. This is sound as ritual tool: direct, uncompromising, and embodied.',
         playlist: [
-            'assets/Viking_Berserker_Rage_Cinematic_Video (1).mp4', 
+            'assets/Viking_Berserker_Rage_Cinematic_Video (1).mp4',
             'assets/Viking_Berserker_Rage_Cinematic_Video (3).mp4',
             'assets/Viking_Berserker_Rage_Cinematic_Video (4).mp4',
-            'assets/Viking_Berserker_Rage_Cinematic_Video (5).mp4',
             'assets/Viking_Berserker_Rage_Cinematic_Video (6).mp4',
-            'assets/Viking_Berserker_Rage_Cinematic_Video (8).mp4'
+            'assets/Viking_Berserker_Rage_Cinematic_Video (5).mp4'
         ],
         overlayTitle: 'The Ritual Cycles',
-cards: [
-    {
-        id: 'I',
-        title: 'Ginnungagap',
-        meta: 'The Void \u2014 Weighted',
-        desc: 'Sustained motion and variable density that establish gravity and orientation. Builds internal tension and readiness without urgency, forming a foundation before force is directed.',        track: {
-        src: 'assets/ginnungagap_runaljud.mp3'
-        }
-    },
-    {
-        id: 'II',
-        title: 'Berserksgangr | Hamask',
-        meta: 'The Fury \u2014 Unleashed',
-        desc: 'A progressive surge from agitation into trance, where restraint dissolves but direction remains. Rhythm overtakes voice as rage is absorbed into automatic motion, reaching a state of relentless urgency, confidence, and decisive force.',
-        track: {
-        src: 'assets/berserkergang_hamask_160_pre.mp3'
-        }
-    },
-    {
-        id: 'III',
-        title: 'Valhǫll',
-        meta: 'The Hall \u2014 Tempered',
-        desc: 'Steady, driving motion and controlled density that hold aggression in check. Channels elevated intensity into discipline, focus, and preparation for conflict.',
-        track: {
-        src: 'assets/valhalla_22_odins_fury_120_pre.mp3'
-        }
-    }
-]
+        cards: [
+            {
+                id: 'I',
+                title: 'Ginnungagap',
+                meta: 'The Void \u2014 Weighted',
+                desc: 'Sustained motion and variable density that establish gravity and orientation. Builds internal tension and readiness without urgency, forming a foundation before force is directed.', track: {
+                    src: 'assets/ginnungagap_runaljud.mp3'
+                }
+            },
+            {
+                id: 'II',
+                title: 'Berserksgangr | Hamask',
+                meta: 'The Fury \u2014 Unleashed',
+                desc: 'A progressive surge from agitation into trance, where restraint dissolves but direction remains. Rhythm overtakes voice as rage is absorbed into automatic motion, reaching a state of relentless urgency, confidence, and decisive force.',
+                track: {
+                    src: 'assets/berserkergang_hamask_160_pre.mp3'
+                }
+            },
+            {
+                id: 'III',
+                title: 'Valhǫll',
+                meta: 'The Hall \u2014 Tempered',
+                desc: 'Steady, driving motion and controlled density that hold aggression in check. Channels elevated intensity into discipline, focus, and preparation for conflict.',
+                track: {
+                    src: 'assets/valhalla_22_odins_fury_120_pre.mp3'
+                }
+            }
+        ]
     },
     folk: {
         id: 'folk',
@@ -106,35 +105,35 @@ cards: [
             'assets/Norse_Ritual_Place_in_Forest (2).mp4'
         ],
         overlayTitle: 'The Folk Forms',
-cards: [
-    {
-        id: 'I',
-        title: 'Saga',
-        meta: 'The Story \u2014 Grounded',
-        desc: 'Melodic structures built around voice and string, intended to carry narrative over time. Supports listening, recall, and the transmission of memory through song.',
-        track: {
-        src: 'assets/saga_1_restless_lover_2_k100_pre.mp3'
-        }
-    },
-    {
-        id: 'II',
-        title: 'Hearth',
-        meta: 'The Home \u2014 Driving',
-        desc: 'Close, grounded textures shaped by repetition and warmth. Creates a sense of safety, continuity, and presence within a shared space.',
-        track: {
-        src: 'assets/hearth_12_forns_sagna_k60_pre.mp3'
-        }
-    },
-    {
-        id: 'III',
-        title: 'Voyage',
-        meta: 'The Horizon \u2014 Flowing',
-        desc: 'Extended, unfolding compositions that accompany movement and transition. Orients attention outward toward landscape, distance, and passage.',
-        track: {
-        src: 'assets/voy_16_Echoes_Ancients_pre.mp3'
-        }
-    }
-]
+        cards: [
+            {
+                id: 'I',
+                title: 'Saga',
+                meta: 'The Story \u2014 Grounded',
+                desc: 'Melodic structures built around voice and string, intended to carry narrative over time. Supports listening, recall, and the transmission of memory through song.',
+                track: {
+                    src: 'assets/saga_1_restless_lover_2_k100_pre.mp3'
+                }
+            },
+            {
+                id: 'II',
+                title: 'Hearth',
+                meta: 'The Home \u2014 Driving',
+                desc: 'Close, grounded textures shaped by repetition and warmth. Creates a sense of safety, continuity, and presence within a shared space.',
+                track: {
+                    src: 'assets/hearth_12_forns_sagna_k60_pre.mp3'
+                }
+            },
+            {
+                id: 'III',
+                title: 'Voyage',
+                meta: 'The Horizon \u2014 Flowing',
+                desc: 'Extended, unfolding compositions that accompany movement and transition. Orients attention outward toward landscape, distance, and passage.',
+                track: {
+                    src: 'assets/voy_16_Echoes_Ancients_pre.mp3'
+                }
+            }
+        ]
     }
 };
 
@@ -149,7 +148,7 @@ const FOCUS_SWITCH_FADE_MS = 3500;
 let currentFocus = null; // 'artist'; // Default
 let activePlaylist = [];
 let currentPlaylistIndex = 0;
-let activePlayerId = 1; 
+let activePlayerId = 1;
 let isTransitioning = false;
 let videoContextToken = 0;
 let crossfadeTimer = null;
@@ -193,12 +192,12 @@ function init() {
     if (!revealed) {
         document.body.style.opacity = "1";
         revealed = true;
-    } 
-        
+    }
+
     // Setup Global Listeners
     setupFocusOverlay();
     setupKeyboard();
-    
+
     // Status
     statusDisplay.textContent = "Identity: Wartem Draumr // Active";
 }
@@ -281,7 +280,7 @@ function switchFocusFromLanding(focusKey) {
 function updateLandingText(data) {
     // Simple fade out/in effect for text
     const elements = [landingTitle, landingSubtitle, landingDesc];
-    
+
     elements.forEach(el => el.classList.add('text-fade-out'));
 
     setTimeout(() => {
@@ -292,7 +291,7 @@ function updateLandingText(data) {
             landingSubtitle.textContent = data.subtitle;
         }
         landingDesc.textContent = data.desc;
-        
+
         elements.forEach(el => {
             el.classList.remove('text-fade-out');
             el.classList.add('text-fade-in');
@@ -360,12 +359,12 @@ function renderPresentationLayer(data) {
         `;
 
         // STEP 4: wire card to audio playback (only if track exists)
-    if (card.track && card.track.src && window.WDPlayer) {
-        div.addEventListener('click', () => {
-            window.WDPlayer.playTrack(card.track.src, card.id, div);
-        });
-        div.classList.add('is-playable');
-    }
+        if (card.track && card.track.src && window.WDPlayer) {
+            div.addEventListener('click', () => {
+                window.WDPlayer.playTrack(card.track.src, card.id, div);
+            });
+            div.classList.add('is-playable');
+        }
 
         cyclesGrid.appendChild(div);
     });
@@ -416,7 +415,7 @@ function ensureActiveVideoPlaying() {
 
     // Some browsers can stall video decode when large composited layers toggle quickly.
     // A best-effort play() nudge keeps playback moving without affecting timing.
-    activeVid.play().catch(() => {});
+    activeVid.play().catch(() => { });
 }
 
 async function changeVideoContext(newPlaylist) {
@@ -573,8 +572,8 @@ function handleVideoEnded(e) {
     if (activePlaylist.length === 1) {
         try {
             activePlayer.currentTime = 0;
-        } catch (e) {}
-        activePlayer.play().catch(() => {});
+        } catch (e) { }
+        activePlayer.play().catch(() => { });
         return;
     }
 
@@ -589,13 +588,6 @@ player2.addEventListener('ended', handleVideoEnded);
 // --- INTERACTION ---
 
 // Shield Wall Logic
-/* enterBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    requestFullscreen();
-    document.body.classList.add('ritual-active');
-    statusDisplay.textContent = `Focus: ${CONTENT[currentFocus].title} // Deep State`;
-}); */
-
 enterBtn.addEventListener('click', (e) => {
     e.preventDefault();
     document.body.classList.add('ritual-active');
@@ -620,7 +612,7 @@ exitBtn.addEventListener('click', (e) => {
 
 function requestFullscreen() {
     const el = document.documentElement;
-    if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+    if (el.requestFullscreen) el.requestFullscreen().catch(() => { });
     else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
 }
 
@@ -636,16 +628,16 @@ function setupFocusOverlay() {
 
     focusOptions.forEach(btn => {
         btn.addEventListener('click', () => {
-    const focusKey = btn.getAttribute('data-focus');
+            const focusKey = btn.getAttribute('data-focus');
 
-    // Start transition FIRST
-    setFocus(focusKey);
+            // Start transition FIRST
+            setFocus(focusKey);
 
-    // Close overlay AFTER fade-out has started
-    setTimeout(() => {
-        focusOverlay.classList.remove('open');
-    }, 300);
-});
+            // Close overlay AFTER fade-out has started
+            setTimeout(() => {
+                focusOverlay.classList.remove('open');
+            }, 300);
+        });
     });
 }
 
@@ -655,7 +647,7 @@ function setupKeyboard() {
             // Close focus overlay if open
             if (focusOverlay.classList.contains('open')) {
                 focusOverlay.classList.remove('open');
-            } 
+            }
             // Or close shield wall if open
             else {
                 standDown();
@@ -673,7 +665,3 @@ function setupKeyboard() {
 
 // Start
 document.addEventListener('DOMContentLoaded', init);
-
-/* window.addEventListener("load", () => {
-    document.body.style.opacity = "1";
-    }); */

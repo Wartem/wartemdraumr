@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wartem Draumr | Ancient Norse &mdash; Primal Norse &amp; Norse Folk</title>
-    <meta name="description" content="Official website of Wartem Draumr, an Ancient Norse music project exploring Primal Norse trance and Norse Folk narrative through raw, ritual sound." />
-     <meta name="keywords" content="Wartem Draumr, Ancient Norse, Primal Norse, Norse Folk, Nordic ritual music, shamanic trance music, Viking music, tagelharpa, frame drum, ritual drums" />
+    <meta name="description"
+        content="Official website of Wartem Draumr, an Ancient Norse music project exploring Primal Norse trance and Norse Folk narrative through raw, ritual sound." />
+    <meta name="keywords"
+        content="Wartem Draumr, Ancient Norse, Primal Norse, Norse Folk, Nordic ritual music, shamanic trance music, Viking music, tagelharpa, frame drum, ritual drums" />
     <meta name="author" content="Wartem" />
     <link rel="icon" type="image/png" href="/assets/logo.png">
-    
+
     <!-- Fonts: Cinzel (Headers) and Raleway (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="ritual.css">
 </head>
+
 <body>
 
     <!-- VIDEO CONTAINER -->
@@ -32,18 +38,18 @@
     <!-- OVERLAYS -->
     <div class="vignette"></div>
     <div class="noise-overlay"></div>
-    <div id="ritual-overlay"></div> 
+    <div id="ritual-overlay"></div>
     <div id="fade-overlay"></div> <!-- Utility for video switching -->
 
     <!--   SOUND EFFECTS -->
     <!--  <button id="sound-trigger" class="ui-trigger">Sound: Off</button> -->
-     
+
     <!-- FOCUS TRIGGER (Always Visible) -->
     <!-- <button id="focus-trigger" class="ui-trigger">SELECT Focus [F]</button> -->
 
     <div id="ui-controls">
-    <button id="sound-trigger" class="ui-trigger">FOCUS Sound: Off [M]</button>
-    <button id="focus-trigger" class="ui-trigger">SELECT Focus [F]</button>
+        <button id="sound-trigger" class="ui-trigger">FOCUS Sound: Off [M]</button>
+        <button id="focus-trigger" class="ui-trigger">SELECT Focus [F]</button>
     </div>
 
     <!-- FOCUS SELECTION OVERLAY (Hidden by default) -->
@@ -62,22 +68,26 @@
     <!-- LANDING CONTENT (Dynamic) -->
     <div class="content-layer" id="landing-layer">
         <h1 id="landing-title">Wartem Draumr</h1>
-        
+
         <div id="intro-content">
             <div class="text-scrim">
-            <h2 id="landing-subtitle"><span class="subtitle-main">ANCIENT NORSE &mdash; A UNIFIED </span><span class="subtitle-break">IDENTITY</span></h2>
-    
-            <p id="landing-desc">
-            <strong>A unified identity. Two expressions of the same ancient current.</strong><br><br>
-            Wartem Draumr is the artistic identity through which an ancient spirit is restored as lived presence and function. Working from an Ancient Norse foundation, the music unfolds through two distinct sonic paths. Primal Norse is visceral, bodily, and ritual-driven. Norse Folk is narrative, textural, and rooted in place and memory. Both are inseparable expressions of the same underlying force.
-            </p>
+                <h2 id="landing-subtitle"><span class="subtitle-main">ANCIENT NORSE &mdash; A UNIFIED </span><span
+                        class="subtitle-break">IDENTITY</span></h2>
+
+                <p id="landing-desc">
+                    <strong>A unified identity. Two expressions of the same ancient current.</strong><br><br>
+                    Wartem Draumr is the artistic identity through which an ancient spirit is restored as lived presence
+                    and function. Working from an Ancient Norse foundation, the music unfolds through two distinct sonic
+                    paths. Primal Norse is visceral, bodily, and ritual-driven. Norse Folk is narrative, textural, and
+                    rooted in place and memory. Both are inseparable expressions of the same underlying force.
+                </p>
             </div>
 
             <!-- Dynamic Action Area -->
             <div id="action-container">
                 <!-- Injected via JS based on Focus -->
             </div>
-            
+
             <a href="#" id="enter-btn" class="btn-trance">Enter The Shield Wall</a>
             <div id="landing-social-links" class="social-links"></div>
         </div>
@@ -97,11 +107,11 @@
         <button id="exit-btn" class="btn-text">Stand Down</button>
 
         <div class="social-links">
-        <a href="#" class="social-link">Spotify</a>
-        <span class="social-separator">·</span>
-        <a href="http://www.youtube.com/@WartemDraumr" class="social-link">YouTube</a>
-        <span class="social-separator">·</span>
-        <a href="#" class="social-link">Bandcamp</a>
+            <a href="#" class="social-link">Spotify</a>
+            <span class="social-separator">·</span>
+            <a href="http://www.youtube.com/@WartemDraumr" class="social-link">YouTube</a>
+            <span class="social-separator">·</span>
+            <a href="#" class="social-link">Bandcamp</a>
         </div>
 
     </div>
@@ -114,4 +124,5 @@
     <script src="script.js"></script>
     <script src="player.js"></script>
 </body>
+
 </html>
