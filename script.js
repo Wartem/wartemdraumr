@@ -167,6 +167,7 @@ const landingSubtitle = document.getElementById('landing-subtitle');
 const landingDesc = document.getElementById('landing-desc');
 const actionContainer = document.getElementById('action-container');
 const landingSocialLinks = document.getElementById('landing-social-links');
+const contactEmail = document.querySelector('.contact-email');
 const presentationTitle = document.getElementById('presentation-title');
 const cyclesGrid = document.getElementById('cycles-grid');
 const enterBtn = document.getElementById('enter-btn'); // Will be event-delegated or managed
@@ -181,6 +182,18 @@ const focusOptions = document.querySelectorAll('.focus-list button');
 // --- INITIALIZATION ---
 
 let revealed = false;
+
+function hydrateEmailLinks() {
+    document.querySelectorAll('.js-email').forEach((link) => {
+        const user = link.getAttribute('data-user');
+        const domain = link.getAttribute('data-domain');
+        const tld = link.getAttribute('data-tld');
+        if (!user || !domain || !tld) return;
+        const email = `${user}@${domain}.${tld}`;
+        link.textContent = email;
+        link.setAttribute('href', `mailto:${email}`);
+    });
+}
 
 function init() {
     document.documentElement.style.setProperty('--focus-switch-fade-ms', `${FOCUS_SWITCH_FADE_MS}ms`);
@@ -197,6 +210,7 @@ function init() {
     // Setup Global Listeners
     setupFocusOverlay();
     setupKeyboard();
+    hydrateEmailLinks();
 
     // Status
     statusDisplay.textContent = "Identity: Wartem Draumr // Active";
@@ -331,11 +345,13 @@ function renderActionButtons(focusKey) {
                 <a href="https://music.apple.com/us/artist/wartem-draumr/1865454839" class="social-link" target="_blank" rel="noopener noreferrer">Apple Music</a>
             `;
         }
+        if (contactEmail) contactEmail.classList.remove('is-hidden');
 
         // Artist mode also keeps the Shield Wall button at the bottom (handled by static HTML #enter-btn)
         enterBtn.style.display = 'inline-block';
         enterBtn.textContent = 'Enter The Shield Wall';
     } else {
+        if (contactEmail) contactEmail.classList.add('is-hidden');
         // Sub-focus modes: Just simple content
         enterBtn.style.display = 'inline-block';
         enterBtn.textContent = 'Enter The Shield Wall';

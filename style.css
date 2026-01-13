@@ -194,6 +194,28 @@ body {
     margin-top: clamp(1.6rem, 1.8vh, 1.9rem);
 }
 
+.contact-email {
+    margin-top: 1.35rem;
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.contact-email.is-hidden {
+    display: none;
+}
+
+.contact-email .js-email {
+    color: inherit;
+    text-decoration: none;
+}
+
+.contact-email .js-email:hover,
+.contact-email .js-email:focus {
+    color: rgba(255, 255, 255, 0.95);
+}
+
 @media (max-width: 1023.98px) {
     #landing-social-links {
         margin-top: calc(clamp(1.6rem, 1.8vh, 1.9rem) + 1rem);
