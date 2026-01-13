@@ -326,9 +326,9 @@ function renderActionButtons(focusKey) {
 
         if (landingSocialLinks) {
             landingSocialLinks.innerHTML = `
-                <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">Spotify</a>
+                <a href="https://open.spotify.com/artist/4m68lDNvGQbRag3nj61W1k?si=zkVIfp-eTNy4WVs6p3bItQ" class="social-link" target="_blank" rel="noopener noreferrer">Spotify</a>
                 <a href="http://www.youtube.com/@WartemDraumr" class="social-link" target="_blank" rel="noopener noreferrer">YouTube</a>
-                <a href="#" class="social-link" target="_blank" rel="noopener noreferrer">Bandcamp</a>
+                <a href="https://music.apple.com/us/artist/wartem-draumr/1865454839" class="social-link" target="_blank" rel="noopener noreferrer">Apple Music</a>
             `;
         }
 

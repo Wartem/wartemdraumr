@@ -599,7 +599,7 @@ p {
     cursor: pointer;
     line-height: 1;
     color: rgba(220, 200, 160, 0.95);
-    opacity: 0.18;
+    opacity: 0.24;
     transition: opacity 0.6s ease, text-shadow 0.6s ease, transform 0.6s ease;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
@@ -618,7 +618,7 @@ p {
 
 .focus-sigil:hover,
 .focus-sigil:focus-visible {
-    opacity: 0.35;
+    opacity: 0.6;
     text-shadow: 0 0 40px rgba(220, 200, 160, 0.22);
     transform: translateY(-1px);
 }
@@ -978,8 +978,8 @@ body.ritual-active.focus-artist #ritual-overlay {
     }
 
     .focus-sigil {
-        opacity: 0.22;
-        /* up from ~0.18 */
+        opacity: 0.24;
+        /* up from ~0.19 */
     }
 }
 
