@@ -211,6 +211,23 @@ body {
     text-decoration: none;
 }
 
+.contact-email .email-chunk,
+.contact-email .email-sep {
+    display: inline-block;
+}
+
+.contact-email .email-chunk::before {
+    content: attr(data-chunk);
+}
+
+.contact-email .email-at::before {
+    content: "@";
+}
+
+.contact-email .email-dot::before {
+    content: ".";
+}
+
 .contact-email .js-email:hover,
 .contact-email .js-email:focus {
     color: rgba(255, 255, 255, 0.95);
